@@ -118,8 +118,8 @@ class Importacao:
         banco = cliente.MagratheaLabs
         albumImp = banco.IMP_FORMATO_TESTE
         
-        gerarTop3ProdAnualEstado(albumImp, px.colors.sequential.Cividis, "Importados")
-        gerarTop3ProdMesEstado(albumImp, "Importados" , px.colors.sequential.Aggrnyl )
-        gerarEstadoEmRelacaoTotPais(albumImp, "Importados" , px.colors.sequential.RdBu)
+        gerarTop3ProdAnualEstado(albumImp, px.colors.sequential.Viridis, "Importados")
+        gerarTop3ProdMesEstado(albumImp, "Importados" , px.colors.sequential.thermal)
+        gerarEstadoEmRelacaoTotPais(albumImp, "Importados" , px.colors.cyclical.Edge)
 
 

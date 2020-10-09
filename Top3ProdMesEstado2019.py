@@ -14,7 +14,6 @@ import plotly.express as px
 
 def gerarTop3ProdMesEstado(dataBase, nome , cor ):
 
-        print("Toop 3 entrou ..")
 
         cliente = MongoClient('mongodb://localhost:27017/')
         banco = cliente.MagratheaLabs
@@ -23,8 +22,7 @@ def gerarTop3ProdMesEstado(dataBase, nome , cor ):
        
         dfFinal = pd.DataFrame(columns=["CO_ANO", "CO_MES", "SG_UF_NCM", "CO_NCM","KG_LIQUIDO"])
 
-        #for estado in listaDeEstados:
-        # colocar todos os estados
+       
         listaDeEstados = list(dataBase.distinct("SG_UF_NCM"))
         
         for estado in listaDeEstados:
@@ -73,10 +71,7 @@ def plotarGrafico(dfFinal, albumNcm, estado, nome, cor):
                                     specs=[[{"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"}],
                                             [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"}],
                                             [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"}]],
-                                    subplot_titles=("Janeiro","Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ))
-
-        # terão seu tamanho len = 12, cada
-        
+                                    subplot_titles=("Janeiro","Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ))        
     
 
         for mes in range(1, 13):

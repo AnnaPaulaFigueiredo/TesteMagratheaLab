@@ -9,6 +9,7 @@ import datetime
 def main():
 
     tempoInicio = datetime.datetime.now()
+    
     # Bloco de Operações para o dataSet Exportação
     exp = Exportacao()
     exp.carregar()
@@ -16,7 +17,7 @@ def main():
     exp.transformar()
     exp.lerInformacoes()
     exp.novoData()
-
+    
     # Bloco de Operações para o dataSet Importação
     imp = Importacao()
     imp.carregar()
@@ -37,7 +38,6 @@ def main():
     enviarMongo()
 
     # Visualizar os Resultados
-
     exp.visualizarDados()
     imp.visualizarDados()
 
