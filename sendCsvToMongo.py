@@ -10,49 +10,40 @@ def exp(myDb):
     line = csv.readline()
     line = csv.readline()
 
-
     while line:
+        
         values = line.split(";")
         data = {}
         try:
-            data["CO_ANO"] =int(values[0])
+            data["CO_ANO"] = int(values[0])
         except:
-            data["CO_ANO"] =None
+            data["CO_ANO"] = None
 
         try:
-            data["CO_MES"] =int(values[1])
+            data["CO_MES"] = int(values[1])
         except:
-            data["CO_MES"] =None
+            data["CO_MES"] = None
 
         try:
-            data["CO_NCM"] =int(values[2])
+            data["CO_NCM"] = int(values[2])
         except:
-            data["CO_NCM"] =None
-
-        try:
-            data["CO_PAIS"] =int(values[3])
-        except:
-            data["CO_PAIS"] =None
+            data["CO_NCM"] = None
         
         try:
-            data["SG_UF_NCM"] =values[4]
+            data["SG_UF_NCM"] = values[3]
         except:
-            data["SG_UF_NCM"] =None
-
-        try:
-            data["QT_ESTAT"] =int(values[5])
-        except:
-            data["QT_ESTAT"] =None
+            data["SG_UF_NCM"] = None
         
         try:
-            data["KG_LIQUIDO"] =int(values[6])
+            data["KG_LIQUIDO"] = int(values[4])
         except:
-            data["KG_LIQUIDO"] =None
+            data["KG_LIQUIDO"] = None
 
         try:
-            data["VL_FOB"] =int(values[7])
+            data["VL_FOB"] = int(values[5])
         except:
-            data["VL_FOB"] =None
+            data["VL_FOB"] = None
+
 
         exp.insert_one(data)
         line = csv.readline()
@@ -106,64 +97,52 @@ def imp(myDb):
         values = line.split(";")
         data = {}
         try:
-            data["CO_ANO"] =int(values[0])
+            data["CO_ANO"] = int(values[0])
         except:
-            data["CO_ANO"] =None
+            data["CO_ANO"] = None
 
         try:
-            data["CO_MES"] =int(values[1])
+            data["CO_MES"] = int(values[1])
         except:
-            data["CO_MES"] =None
+            data["CO_MES"] = None
 
         try:
-            data["CO_NCM"] =int(values[2])
+            data["CO_NCM"] = int(values[2])
         except:
-            data["CO_NCM"] =None
-
-        try:
-            data["CO_PAIS"] =int(values[3])
-        except:
-            data["CO_PAIS"] =None
+            data["CO_NCM"] = None
         
         try:
-            data["SG_UF_NCM"] =values[4]
+            data["SG_UF_NCM"] = values[3]
         except:
-            data["SG_UF_NCM"] =None
-
-        try:
-            data["QT_ESTAT"] =int(values[5])
-        except:
-            data["QT_ESTAT"] =None
+            data["SG_UF_NCM"] = None
         
         try:
-            data["KG_LIQUIDO"] =int(values[6])
+            data["KG_LIQUIDO"] = int(values[4])
         except:
-            data["KG_LIQUIDO"] =None
+            data["KG_LIQUIDO"] = None
 
         try:
-            data["VL_FOB"] =int(values[7])
+            data["VL_FOB"] = int(values[5])
         except:
-            data["VL_FOB"] =None
+            data["VL_FOB"] = None
 
         imp.insert_one(data)
         line = csv.readline()
 
-def main():
+def enviarMongo():
 
+    print("Enviando para o MongoDb...")
     client = MongoClient('localhost', 27017)
-    myDb = client["Magrathea"]
+    myDb = client["MagratheaLabs"]
     
-    #print("EXP")
-    #exp(myDb)
+    print("EXP")
+    exp(myDb)
     
-    #print("NCM")
-    #ncm(myDb)
+    print("NCM")
+    ncm(myDb)
     
-    #print("IMP")
-    #imp(myDb)
+    print("IMP")
+    imp(myDb)
     
     print("DONE.")
 
-
-if __name__ == "__main__":
-    main()

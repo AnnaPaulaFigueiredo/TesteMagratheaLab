@@ -13,8 +13,7 @@ def gerarTop3ProdAnualEstado(dataBase, cor, nome):
 
 
     cliente = MongoClient('localhost', 27017)
-    cliente = MongoClient('mongodb://localhost:27017/')
-    banco = cliente.Magrathea
+    banco = cliente.MagratheaLabs
     albumNcm = banco.NCM_FORMATO_TESTE
 
     plotarGrafico(dfFiltrado, albumNcm, listaDeEstado, cor, nome)
@@ -63,21 +62,23 @@ def plotarGrafico(df, albumNcm, listaDeEstado, cor, nome):
     linha = 1
     coluna = 1
     figSubplot = make_subplots(
-                                rows=6, cols=5,
+                                rows=7, cols=4,
                                 specs=[
-                                        [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"}],
-                                        [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"}],
-                                        [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"}],
-                                        [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"}],
-                                        [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"}],
-                                        [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"}],
+                                        [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"},],
+                                        [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"},],
+                                        [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"},],
+                                        [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"},],
+                                        [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"},],
+                                        [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"},],
+                                        [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}, {"type": "bar"},],
+                                     
                                         ],
                                 subplot_titles=("Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará",
                                                 "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", 
                                                 "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará",
                                                 "Paraíba",  "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro",
                                                 "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima",
-                                                "Santa Catarina", "São Paulo", "Sergipe", "Tocantins","","","",""))
+                                                "Santa Catarina", "São Paulo", "Sergipe", "Tocantins", ""))
 
     # terão seu tamanho len = 12, cada
     
@@ -109,22 +110,11 @@ def plotarGrafico(df, albumNcm, listaDeEstado, cor, nome):
             nomeProd2 = limparStringDoFormatoLista(str(nomeProd2["NO_NCM_POR"].values))
             nomeProd3 = limparStringDoFormatoLista(str(nomeProd3["NO_NCM_POR"].values))
 
-            if "," in nomeProd1:
-
-                np1 = nomeProd1.split(",")
-                np1 = np1[0]
             
-            else:
-                np1 = nomeProd1.split()
-                np1 = np1[0]
-
-            produtos = ["P1", "P2", "P3"]
+            produtos = ["P1: "+ str(codProd1), "P2: "+ str(codProd2), "P3: "+ str(codProd3)]
             qnt = [qntProd1, qntProd2, qntProd3]
 
             
-
-
-
 
             figSubplot.add_trace(go.Bar(x = produtos,
                                         y = qnt,
@@ -134,7 +124,7 @@ def plotarGrafico(df, albumNcm, listaDeEstado, cor, nome):
                                         ), row=linha,col=coluna)
             coluna = coluna + 1
             
-            if coluna == 6:
+            if coluna == 5:
                 
                 linha = linha + 1
                 coluna = 1
@@ -144,7 +134,7 @@ def plotarGrafico(df, albumNcm, listaDeEstado, cor, nome):
         except:
             pass
         
-    figSubplot.update_layout(height=1400, width=1400, showlegend=False, title_text="Top3 Produtos " + nome + " pelo Brasil entre 2017 - 2019")
+    figSubplot.update_layout(height=1800, width=1400, showlegend=False, title_text="Top3 Produtos " + nome + " pelo Brasil entre 2017 - 2019")
     figSubplot.show()
     nameSave = "top3-" + nome + "-UF-2017-2019.html"
     figSubplot.write_html("Results/"+nameSave)

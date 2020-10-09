@@ -19,21 +19,15 @@ def gerarEstadoEmRelacaoTotPais(dataBase, nome, cor):
    
         uf = relacaoDolarUF.index
         valorDolarUF = relacaoDolarUF.values
-  
-        # A SOMA TOTAL DE VL_FOB
-        totalPais = list(dataBase.find(query,{"VL_FOB": 1}))
-        dfTotalPais = pd.DataFrame(totalPais)
         
-        totalDolarPais = dfTotalPais.VL_FOB.sum()
-
         titulo = "Representatividade Total de " + nome +" por Estado no Ano de 2019"      
 
         data = {
             "UF": uf,
-            "Valor": valorDolarUF
+            "Valor US$": valorDolarUF
         }
         
-        fig = px.pie(data, names="UF", values="Valor", title=titulo, color_discrete_sequence=cor)
+        fig = px.pie(data, names="UF", values="Valor US$", title=titulo, color_discrete_sequence=cor)
         fig.update_traces(textposition='inside', textinfo='percent+label')
 
         fig.show()

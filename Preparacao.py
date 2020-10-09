@@ -41,17 +41,9 @@ class Preparacao:
         
         print("Filtrando Anos 2017-2018-2019...")
         
-        remover = None
         anos = [2017, 2018, 2019]
-        remover = self.data.query("CO_ANO not in @anos")
-
-        if len(remover) > 0:
-
-            indices = self.data.query("CO_ANO not in @anos").index
-            self.data = self.removerLinhas(indices)
-        
-        else:
-            print("Não há elementos para serem removidos.")
+        remover = self.data.query("CO_ANO not in @anos").index 
+        self.data = self.removerLinhas(remover)
 
         return self.data
     
